@@ -101,7 +101,7 @@ class WasteCollectionSchedule:
         for file in self.__scan_ics_files():
             num_loaded = 0
             try:
-                logging.debug("parsing " + file)
+                logging.info("parsing " + file)
                 content = self.__read_ics_file(file)
                 c = Calendar(content)
                 for event in c.events:
@@ -136,6 +136,6 @@ class WasteCollectionSchedule:
         while self.__is_running:
             try:
                 self.__reload()
-                sleep(3*59)
+                sleep(12*59)
             except Exception as e:
                 logging.warning("error occurred on sync " + str(e))
