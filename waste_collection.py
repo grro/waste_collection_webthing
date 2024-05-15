@@ -46,6 +46,7 @@ class WasteCollectionSchedule:
         self.recycling_timeseries = []
         self.residual_timeseries = []
         self.paper_timeseries = []
+        self.scanned_ics_files = []
         self.__reload()
 
     def set_listener(self,listener):
@@ -99,7 +100,8 @@ class WasteCollectionSchedule:
         new_residual_timeseries = []
         new_paper_timeseries = []
 
-        for file in self.__scan_ics_files():
+        files = self.__scan_ics_files()
+        for file in files:
             num_loaded = 0
             try:
                 logging.info("parsing " + file)
@@ -125,6 +127,7 @@ class WasteCollectionSchedule:
         self.organic_timeseries = sorted(new_organic_timeseries)
         self.residual_timeseries = sorted(new_residual_timeseries)
         self.paper_timeseries = sorted(new_paper_timeseries)
+        self.scanned_ics_files = files
         self.__listener()
 
     def start(self):

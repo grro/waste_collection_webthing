@@ -89,6 +89,19 @@ class WasteCollectionScheduleThing(Thing):
                      }))
 
 
+        self.scanned_ics_files = Value(",".join(schedule.scanned_ics_files))
+        self.add_property(
+            Property(self,
+                     'scanned_ics_files',
+                     self.scanned_ics_files,
+                     metadata={
+                         'title': 'scanned_ics_files',
+                         "type": "string",
+                         'description': 'the scanned ics files',
+                         'readOnly': True,
+                     }))
+
+
     def on_value_changed(self):
         self.ioloop.add_callback(self._on_value_changed)
 
@@ -97,6 +110,7 @@ class WasteCollectionScheduleThing(Thing):
         self.next_recycling.notify_of_external_update(self.schedule.next_recycling.strftime("%Y-%m-%d"))
         self.next_residual.notify_of_external_update(self.schedule.next_residual.strftime("%Y-%m-%d"))
         self.next_paper.notify_of_external_update(self.schedule.next_paper.strftime("%Y-%m-%d"))
+        self.scanned_ics_files.notify_of_external_update(", ".join(self.schedule.scanned_ics_files))
 
 
 def run_server(description: str, port: int, directory: str):
