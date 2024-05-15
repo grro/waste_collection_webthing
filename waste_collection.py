@@ -73,6 +73,7 @@ class WasteCollectionSchedule:
                 return date
 
     def __scan_ics_files(self):
+        logging.info("parsing dir " + self.directory)
         files = []
         for file in os.listdir(self.directory):
             if file.endswith('.ics'):
