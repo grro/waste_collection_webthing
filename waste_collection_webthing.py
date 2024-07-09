@@ -65,13 +65,13 @@ class WasteCollectionScheduleThing(Thing):
                          'readOnly': True,
                      }))
 
-        self.next_organic_message = Value("")
+        self.next_organic_reminder = Value("")
         self.add_property(
             Property(self,
-                     'next_organic_message',
-                     self.next_organic_message,
+                     'next_organic_reminder',
+                     self.next_organic_reminder,
                      metadata={
-                         'title': 'next_organic_message',
+                         'title': 'next_organic_reminder',
                          "type": "string",
                          'description': 'the next collection message',
                          'readOnly': True,
@@ -101,13 +101,13 @@ class WasteCollectionScheduleThing(Thing):
                          'readOnly': True,
                      }))
 
-        self.next_recycling_message = Value("")
+        self.next_recycling_reminder = Value("")
         self.add_property(
             Property(self,
-                     'next_recycling_message',
-                     self.next_recycling_message,
+                     'next_recycling_reminder',
+                     self.next_recycling_reminder,
                      metadata={
-                         'title': 'next_recycling_message',
+                         'title': 'next_recycling_reminder',
                          "type": "string",
                          'description': 'the next collection message',
                          'readOnly': True,
@@ -137,13 +137,13 @@ class WasteCollectionScheduleThing(Thing):
                          'readOnly': True,
                      }))
 
-        self.next_paper_message = Value("")
+        self.next_paper_reminder = Value("")
         self.add_property(
             Property(self,
-                     'next_paper_message',
-                     self.next_paper_message,
+                     'next_paper_reminder',
+                     self.next_paper_reminder,
                      metadata={
-                         'title': 'next_paper_message',
+                         'title': 'next_paper_reminder',
                          "type": "string",
                          'description': 'the next collection message',
                          'readOnly': True,
@@ -173,13 +173,13 @@ class WasteCollectionScheduleThing(Thing):
                          'readOnly': True,
                      }))
 
-        self.next_residual_message = Value("")
+        self.next_residual_reminder = Value("")
         self.add_property(
             Property(self,
-                     'next_residual_message',
-                     self.next_residual_message,
+                     'next_residual_reminder',
+                     self.next_residual_reminder,
                      metadata={
-                         'title': 'next_residual_message',
+                         'title': 'next_residual_reminder',
                          "type": "string",
                          'description': 'the next collection message',
                          'readOnly': True,
@@ -244,19 +244,19 @@ class WasteCollectionScheduleThing(Thing):
         try:
             self.next_organic_soon.notify_of_external_update(self.__is_soon(self.schedule.next_organic))
             self.next_organic.notify_of_external_update(self.schedule.next_organic.strftime("%Y-%m-%d"))
-            self.next_organic_message.notify_of_external_update(self.__reminder(self.schedule.next_organic))
+            self.next_organic_reminder.notify_of_external_update(self.__reminder(self.schedule.next_organic))
 
             self.next_recycling_soon.notify_of_external_update(self.__is_soon(self.schedule.next_recycling))
             self.next_recycling.notify_of_external_update(self.schedule.next_recycling.strftime("%Y-%m-%d"))
-            self.next_recycling_message.notify_of_external_update(self.__reminder(self.schedule.next_recycling))
+            self.next_recycling_reminder.notify_of_external_update(self.__reminder(self.schedule.next_recycling))
 
             self.next_residual_soon.notify_of_external_update(self.__is_soon(self.schedule.next_residual))
             self.next_residual.notify_of_external_update(self.schedule.next_residual.strftime("%Y-%m-%d"))
-            self.next_residual_message.notify_of_external_update(self.__reminder(self.schedule.next_residual))
+            self.next_residual_reminder.notify_of_external_update(self.__reminder(self.schedule.next_residual))
 
             self.next_paper_soon.notify_of_external_update(self.__is_soon(self.schedule.next_paper))
             self.next_paper.notify_of_external_update(self.schedule.next_paper.strftime("%Y-%m-%d"))
-            self.next_paper_message.notify_of_external_update(self.__reminder(self.schedule.next_paper))
+            self.next_paper_reminder.notify_of_external_update(self.__reminder(self.schedule.next_paper))
 
             self.scanned_ics_files.notify_of_external_update(", ".join(self.schedule.scanned_ics_files))
         except Exception as e:
