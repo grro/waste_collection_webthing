@@ -140,6 +140,6 @@ class WasteCollectionSchedule:
         while self.__is_running:
             try:
                 self.__reload()
-                sleep(19)
+                sleep(60)
             except Exception as e:
                 logging.warning("error occurred on sync " + str(e))
