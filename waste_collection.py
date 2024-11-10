@@ -143,3 +143,4 @@ class WasteCollectionSchedule:
                 sleep(27 * 60)
             except Exception as e:
                 logging.warning("error occurred on sync " + str(e))
+                sleep(60)
