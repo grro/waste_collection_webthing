@@ -1,2 +1,3 @@
 webthing>=0.15.0
 ics>=0.7.2
+mcp-baselib>=0.0.6

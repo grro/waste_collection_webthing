@@ -4,7 +4,7 @@ import logging
 import tornado.ioloop
 from webthing import (SingleThing, Property, Thing, Value, WebThingServer)
 from waste_collection import WasteCollectionSchedule
-
+from waste_collection_mcp import WasteCollectionScheduleMCPServer
 
 
 
@@ -266,13 +266,17 @@ class WasteCollectionScheduleThing(Thing):
 def run_server(description: str, port: int, directory: str):
     schedule = WasteCollectionSchedule(directory)
     server = WebThingServer(SingleThing(WasteCollectionScheduleThing(description, schedule)), port=port, disable_host_validation=True)
+    mcp_server = WasteCollectionScheduleMCPServer("WasteCollectionSchedule", port=port+2, schedule=schedule)
+
     try:
         logging.info('starting the server http://localhost:' + str(port) + " (directory=" + directory + ")")
         schedule.start()
+        mcp_server.start()
         server.start()
     except KeyboardInterrupt:
         logging.info('stopping the server')
         schedule.stop()
+        mcp_server.stop()
         server.stop()
         logging.info('done')
 
@@ -282,8 +286,6 @@ if __name__ == '__main__':
     logging.getLogger('tornado.access').setLevel(logging.ERROR)
     logging.getLogger('urllib3.connectionpool').setLevel(logging.WARNING)
     run_server("description", int(sys.argv[1]), sys.argv[2])
-
-
 
 
 

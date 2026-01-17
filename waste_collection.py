@@ -119,7 +119,7 @@ class WasteCollectionSchedule:
                         new_paper_timeseries.append(date)
                     elif 'rest' in topic.lower():
                         new_residual_timeseries.append(date)
-                logging.debug(str(num_loaded) + " reminders loaded for " + file)
+                logging.info(str(num_loaded) + " reminders loaded for " + file)
             except Exception as e:
                 logging.warning("error occurred parsing " + file + " " + str(e))
 
